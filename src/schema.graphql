@@ -1,0 +1,114 @@
+type Query {
+  me: User!
+  users(query: String, take: Int, skip: Int): [User!]!
+  posts(query: String, take: Int, skip: Int): [Post!]!
+  myPosts(query: String, take: Int, skip: Int): [Post!]!
+  post(id: ID!): Post!
+  comments: [Comment!]!
+}
+
+type Mutation {
+  userLogin(email: String!, password: String!): AuthPayload!
+
+  userCreate(input: userCreateInput!): AuthPayload!
+  userUpdate(input: userUpdateInput!): User!
+  userDelete: User!
+  postCreate(input: postCreateInput!): Post!
+  postDelete(id: ID!): Post!
+  postUpdate(id: ID!, input: postUpdateInput!): Post!
+  commentCreate(input: commentCreateInput!): Comment!
+  commentDelete(id: ID!): Comment!
+  commentUpdate(id: ID!, input: commentUpdateInput!): Comment!
+}
+
+type AuthPayload {
+  user: User!
+  token: String!
+}
+
+type Subscription {
+  comment(postId: String!): CommentSubscriptionPayload!
+  post: PostSubscriptionPayload!
+  myPost: PostSubscriptionPayload!
+}
+
+input userCreateInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input userUpdateInput {
+  name: String
+  email: String
+  password: String
+}
+
+input postCreateInput {
+  title: String!
+  body: String!
+  published: Boolean!
+}
+
+input postUpdateInput {
+  title: String
+  body: String
+  published: Boolean
+}
+
+input commentUpdateInput {
+  text: String
+}
+
+input commentCreateInput {
+  text: String!
+  post: ID!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String
+  createdAt: String!
+  updatedAt: String!
+  posts: [Post!]!
+  comments: [Comment!]!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  body: String!
+  published: Boolean!
+  createdAt: String!
+  updatedAt: String!
+
+  author: User!
+  comments: [Comment!]!
+}
+
+type Comment {
+  id: ID!
+  text: String!
+  createdAt: String!
+  updatedAt: String!
+
+  author: User!
+  post: Post!
+}
+
+type PostSubscriptionPayload {
+  data: Post!
+  mutation: MutationAllowed!
+}
+
+type CommentSubscriptionPayload {
+  data: Comment!
+  mutation: MutationAllowed!
+}
+
+enum MutationAllowed {
+  CREATED
+  UPDATED
+  DELETED
+}
