@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon -e .js,.graphql,.ts,.prisma --exec ts-node src/index.ts"
+    "dev": "nodemon -e .js,.graphql,.ts,.prisma --exec ts-node src/index.ts",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
