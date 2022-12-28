@@ -95,6 +95,7 @@ const serverCleanup = (0, ws_2.useServer)({
 const server = new server_1.ApolloServer({
     schema,
     csrfPrevention: true,
+    introspection: true,
     plugins: [
         // Proper shutdown for the HTTP server.
         (0, drainHttpServer_1.ApolloServerPluginDrainHttpServer)({ httpServer }),
