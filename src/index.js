@@ -48,7 +48,7 @@ const ws_1 = require("ws");
 const ws_2 = require("graphql-ws/lib/use/ws");
 const body_parser_1 = __importStar(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
-const node_fs_1 = require("node:fs");
+const fs_1 = require("fs");
 const index_1 = require("./resolvers/index");
 const graphql_subscriptions_1 = require("graphql-subscriptions");
 const client_1 = require("@prisma/client");
@@ -59,7 +59,7 @@ const prisma = new client_1.PrismaClient();
 // Create the schema, which will be used separately by ApolloServer and
 // the WebSocket server.
 const schema = (0, schema_1.makeExecutableSchema)({
-    typeDefs: (0, node_fs_1.readFileSync)("./src/schema.graphql", "utf-8"),
+    typeDefs: (0, fs_1.readFileSync)("./src/schema.graphql", "utf-8"),
     resolvers: {
         Query: index_1.Query,
         Mutation: index_1.Mutation,

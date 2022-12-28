@@ -11,7 +11,7 @@ import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
 import bodyParser, { json } from "body-parser";
 import cors from "cors";
-import { readFileSync } from "node:fs";
+import { readFileSync } from "fs";
 import {
   Query,
   Post,
