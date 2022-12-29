@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon -e .js,.graphql,.ts,.prisma --exec ts-node src/index.ts",
-    "start": "node src/index.js"
+    "dev": "env-cmd -f ./config/.env.dev nodemon -e .js,.graphql,.ts,.prisma --exec ts-node src/index.ts",
+    "push:postgres:dev": "env-cmd -f ./config/.env.dev  npx prisma db push",
+    "start": "node src/index.js",
+    "test": "env-cmd -f ./config/.env.test npx prisma db push"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/ws": "^8.5.3",
     "dotenv": "^16.0.3",
+    "env-cmd": "^10.1.0",
     "nodemon": "^2.0.20",
     "prisma": "^4.5.0",
     "ts-node-dev": "^2.0.0",
