@@ -7,6 +7,3 @@ node_modules
 
 # ignore typescript files
 *.ts
-
-# test directory
-tests/
