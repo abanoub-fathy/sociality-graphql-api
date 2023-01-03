@@ -1,4 +1,4 @@
-import { Context } from "..";
+import { Context } from "../server";
 import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
 import getUserId from "../utils/getUserId";

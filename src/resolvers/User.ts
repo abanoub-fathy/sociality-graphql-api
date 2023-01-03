@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { Context } from "..";
+import { Context } from "../server";
 import getUserId from "../utils/getUserId";
 
 const User = {

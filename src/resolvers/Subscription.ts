@@ -1,4 +1,4 @@
-import { Context } from "..";
+import { Context } from "../server";
 import { mustAuth } from "../utils/mustAuth";
 
 interface PostSubscribeArgs {

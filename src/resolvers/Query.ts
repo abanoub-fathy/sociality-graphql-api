@@ -1,4 +1,4 @@
-import { Context } from "..";
+import { Context } from "../server";
 import getUserId from "../utils/getUserId";
 import { mustAuth } from "../utils/mustAuth";
 

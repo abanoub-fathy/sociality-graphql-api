@@ -1,5 +1,5 @@
-import { Post } from '@prisma/client';
-import { Context } from '..';
+import { Post } from "@prisma/client";
+import { Context } from "../server";
 
 const Post = {
   async author(parent: Post, _: any, { prisma, pubsub }: Context) {
