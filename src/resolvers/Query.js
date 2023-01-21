@@ -164,11 +164,16 @@ const Query = {
             if (!userAuth.userAuthenticated) {
                 throw new Error(userAuth.error);
             }
-            return yield prisma.user.findFirst({
+            const user = yield prisma.user.findFirst({
                 where: {
                     id: userAuth.userId,
                 },
+                select: {
+                    email: true,
+                },
             });
+            console.log("user =", user);
+            return user;
         });
     },
 };

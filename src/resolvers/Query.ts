@@ -176,11 +176,15 @@ const Query = {
     if (!userAuth.userAuthenticated) {
       throw new Error(userAuth.error);
     }
-    return await prisma.user.findFirst({
+    const user = await prisma.user.findFirst({
       where: {
         id: userAuth.userId,
       },
     });
+
+    console.log("user =", user);
+
+    return user;
   },
 };
 

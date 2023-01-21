@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = exports.pubsub = void 0;
+exports.default = exports.prisma = exports.pubsub = void 0;
 const express_1 = __importDefault(require("express"));
 const server_1 = require("@apollo/server");
 const express4_1 = require("@apollo/server/express4");
@@ -53,7 +53,7 @@ const client_1 = require("@prisma/client");
 // create new pubsub instance
 exports.pubsub = new graphql_subscriptions_1.PubSub();
 // prisma client
-const prisma = new client_1.PrismaClient();
+exports.prisma = new client_1.PrismaClient();
 // Create the schema, which will be used separately by ApolloServer and
 // the WebSocket server.
 const schema = (0, schema_1.makeExecutableSchema)({
@@ -83,7 +83,7 @@ const serverCleanup = (0, ws_2.useServer)({
     context: (ctx, _, __) => __awaiter(void 0, void 0, void 0, function* () {
         return {
             pubsub: exports.pubsub,
-            prisma,
+            prisma: exports.prisma,
             authToken: ctx.connectionParams
                 ? ctx.connectionParams.Authorization
                 : undefined,
@@ -124,7 +124,7 @@ start().then(() => {
         context: ({ req }) => __awaiter(void 0, void 0, void 0, function* () {
             return {
                 pubsub: exports.pubsub,
-                prisma,
+                prisma: exports.prisma,
                 authToken: req.headers.authorization,
             };
         }),

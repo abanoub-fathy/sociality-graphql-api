@@ -7,7 +7,7 @@
     "dev": "env-cmd -f ./config/.env.dev nodemon -e .js,.graphql,.ts,.prisma --exec ts-node src/index.ts",
     "push:postgres:dev": "env-cmd -f ./config/.env.dev  npx prisma db push",
     "start": "node src/index.js",
-    "test": "env-cmd -f ./config/.env.test jest --watch",
+    "test": "env-cmd -f ./config/.env.test jest --watch --runInBand",
     "temp": " npx prisma db push"
   },
   "keywords": [],
