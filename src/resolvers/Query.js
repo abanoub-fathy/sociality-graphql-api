@@ -168,9 +168,6 @@ const Query = {
                 where: {
                     id: userAuth.userId,
                 },
-                select: {
-                    email: true,
-                },
             });
             console.log("user =", user);
             return user;
