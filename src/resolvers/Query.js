@@ -169,7 +169,6 @@ const Query = {
                     id: userAuth.userId,
                 },
             });
-            console.log("user =", user);
             return user;
         });
     },

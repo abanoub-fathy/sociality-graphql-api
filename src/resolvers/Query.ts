@@ -182,8 +182,6 @@ const Query = {
       },
     });
 
-    console.log("user =", user);
-
     return user;
   },
 };
