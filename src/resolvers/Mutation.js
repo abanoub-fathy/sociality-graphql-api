@@ -153,7 +153,7 @@ const Mutation = {
             const newPost = yield prisma.post.create({
                 data: {
                     title: input.title,
-                    body: input.title,
+                    body: input.body,
                     published: input.published,
                     userId: userId,
                 },
