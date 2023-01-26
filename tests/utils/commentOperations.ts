@@ -9,8 +9,21 @@ const deleteCommentMutation = gql`
   }
 `;
 
+const postCommentSubscription = gql`
+  subscription ($postId: String!) {
+    comment(postId: $postId) {
+      data {
+        id
+        text
+      }
+      mutation
+    }
+  }
+`;
+
 const commentOperations = {
   deleteCommentMutation,
+  postCommentSubscription,
 };
 
 export { commentOperations as default };
