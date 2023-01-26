@@ -1,8 +1,7 @@
-import { gql } from "apollo-server";
 import getClient from "./utils/client";
 import seedDatabase, { postOne, userOne } from "./utils/seedDatabase";
 import prisma from "./utils/prisma";
-import postOperations from "./postOperations";
+import postOperations from "./utils/postOperations";
 
 const client = getClient();
 
