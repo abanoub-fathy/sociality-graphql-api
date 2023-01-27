@@ -21,6 +21,7 @@ const Subscription = {
       if (!post) {
         throw new Error(`post with id = ${postId} not found`);
       }
+      console.log("attemp to subscribe");
       return pubsub.asyncIterator(`commentOnPostWithID=${postId}`);
     },
   },

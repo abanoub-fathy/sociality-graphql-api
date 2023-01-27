@@ -7,7 +7,6 @@ import seedDatabase, {
 import getClient from "./utils/client";
 import commentOperations from "./utils/commentOperations";
 import prisma from "./utils/prisma";
-import fetch from "cross-fetch";
 
 beforeEach(seedDatabase);
 const client = getClient();
@@ -54,40 +53,30 @@ test("should not delete other user's comment", async () => {
   expect(commentFetched.id).toBe(commentTwo.comment?.id);
 });
 
-test("should subscribe to post comments", (done) => {
-  const subscriptionOnComments = client.subscribe({
+test("should subscribe to post comments", function (done) {
+  const authClient = getClient(userOne.token);
+
+  const subscriptionOnComments = authClient.subscribe({
     query: commentOperations.postCommentSubscription,
     variables: {
       postId: postOne.post?.id,
     },
-    fetchPolicy: "no-cache",
   });
 
   subscriptionOnComments.subscribe({
-    start(subscription) {
-      console.log("subscription =", subscription);
-    },
-    next(value) {
-      console.log("value =", value);
+    next(response) {
+      console.log(response);
+      expect(response.data.comment.mutation).toBe("DELETED");
       done();
-    },
-    complete() {
-      console.log("subscription completed");
-    },
-    error(errorValue) {
-      console.log("errorValue =", errorValue);
     },
   });
 
-  const deleteUserComment = async () => {
-    const clientAuth = getClient(userOne.token);
-    await clientAuth.mutate({
+  (async function deleteComment() {
+    await authClient.mutate({
       mutation: commentOperations.deleteCommentMutation,
       variables: {
         commentDeleteId: commentOne.comment?.id,
       },
     });
-  };
-
-  deleteUserComment();
+  })();
 });

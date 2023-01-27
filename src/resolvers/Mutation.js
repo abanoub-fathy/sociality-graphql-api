@@ -353,11 +353,18 @@ const Mutation = {
                 },
             });
             // publish that the comment is deleted
-            pubsub.publish(`commentOnPostWithID=${deletedComment.postId}`, {
+            pubsub
+                .publish(`commentOnPostWithID=${deletedComment.postId}`, {
                 comment: {
                     data: deletedComment,
                     mutation: "DELETED",
                 },
+            })
+                .then((data) => {
+                console.log("pubsub push data =", data);
+            })
+                .catch((err) => {
+                console.log("pubsub push error =", err);
             });
             // return deleted comment
             return deletedComment;

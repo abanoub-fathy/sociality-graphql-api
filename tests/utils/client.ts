@@ -11,26 +11,9 @@ const getWsLink = (token: string | undefined) => {
     createClient({
       url: "ws://localhost:1233/graphql",
       connectionParams: {
-        authToken: `Bearer ${token}`,
+        authToken: token as string,
       },
       webSocketImpl: WebSocket,
-      on: {
-        connecting: () => {
-          console.log("connecting");
-        },
-        connected: (data) => {
-          console.log("connected, data =");
-        },
-        ping: () => {
-          console.log("ping");
-        },
-        pong: () => {
-          console.log("pong");
-        },
-        closed: () => {
-          console.log("closed");
-        },
-      },
     })
   );
 
