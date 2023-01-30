@@ -15,4 +15,4 @@ jobs:
       - name: push prisma schema changes to the database
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL}}
-        run: env-cmd npx prisma db push
+        run: npx prisma db push
