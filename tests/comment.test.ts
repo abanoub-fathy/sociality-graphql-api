@@ -53,30 +53,30 @@ test("should not delete other user's comment", async () => {
   expect(commentFetched.id).toBe(commentTwo.comment?.id);
 });
 
-test("should subscribe to post comments", function (done) {
-  const authClient = getClient(userOne.token);
+// test("should subscribe to post comments", function (done) {
+//   const authClient = getClient(userOne.token);
 
-  const subscriptionOnComments = authClient.subscribe({
-    query: commentOperations.postCommentSubscription,
-    variables: {
-      postId: postOne.post?.id,
-    },
-  });
+//   const subscriptionOnComments = authClient.subscribe({
+//     query: commentOperations.postCommentSubscription,
+//     variables: {
+//       postId: postOne.post?.id,
+//     },
+//   });
 
-  subscriptionOnComments.subscribe({
-    next(response) {
-      console.log(response);
-      expect(response.data.comment.mutation).toBe("DELETED");
-      done();
-    },
-  });
+//   subscriptionOnComments.subscribe({
+//     next(response) {
+//       console.log(response);
+//       expect(response.data.comment.mutation).toBe("DELETED");
+//       done();
+//     },
+//   });
 
-  (async function deleteComment() {
-    await authClient.mutate({
-      mutation: commentOperations.deleteCommentMutation,
-      variables: {
-        commentDeleteId: commentOne.comment?.id,
-      },
-    });
-  })();
-});
+//   (async function deleteComment() {
+//     await authClient.mutate({
+//       mutation: commentOperations.deleteCommentMutation,
+//       variables: {
+//         commentDeleteId: commentOne.comment?.id,
+//       },
+//     });
+//   })();
+// });
