@@ -9,7 +9,7 @@ import WebSocket from "ws";
 const getWsLink = (token: string | undefined) => {
   const wsLink = new GraphQLWsLink(
     createClient({
-      url: "ws://localhost:1233/graphql",
+      url: `ws://localhost:${process.env.PORT as string}/graphql`,
       connectionParams: {
         authToken: token as string,
       },
@@ -22,7 +22,7 @@ const getWsLink = (token: string | undefined) => {
 
 const getHttpLink = (token: string | undefined) => {
   const httpLink = new HttpLink({
-    uri: "http://localhost:1233/graphql",
+    uri: `http://localhost:${process.env.PORT as string}/graphql`,
     fetch,
     headers: {
       authorization: token ? `Bearer ${token}` : "",
