@@ -1,0 +1,18 @@
+name: Push database schema changes to Database
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: push prisma schema changes to the database
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL}}
+        run: env-cmd npx prisma db push
